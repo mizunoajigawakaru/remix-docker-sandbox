@@ -1,4 +1,4 @@
-FROM node:21-bullseye-slim
+FROM node:23-slim
 WORKDIR /myapp
 
 ### Copy the lock and package file
