@@ -42,6 +42,12 @@ app.use(express.static("build/client", { maxAge: "1h" }));
 
 app.use(morgan("tiny"));
 
+// Node version
+app.get('/node-version', (_, res) => {
+  res.status(200).send(`Node.js version: ${process.version}`);
+});
+
+
 // handle SSR requests
 app.all("*", remixHandler);
 
