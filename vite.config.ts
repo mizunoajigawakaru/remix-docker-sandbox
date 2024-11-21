@@ -1,6 +1,8 @@
+/// <reference types="vitest" />
 import { vitePlugin as remix } from "@remix-run/dev";
 import { defineConfig } from "vite";
 import tsconfigPaths from "vite-tsconfig-paths";
+import react from '@vitejs/plugin-react';
 
 declare module "@remix-run/node" {
   interface Future {
@@ -20,5 +22,12 @@ export default defineConfig({
       },
     }),
     tsconfigPaths(),
+    react()
   ],
+  test: {
+    globals: true,
+    environment: 'jsdom',
+    include: ['app/**/*.test.ts', 'app/**/*.test.tsx'],
+    exclude: ['tests/e2e/**/*'],
+  }
 });
