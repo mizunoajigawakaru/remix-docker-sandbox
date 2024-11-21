@@ -37,10 +37,14 @@ jobs:
     - name: Run unit tests
       run: npm run test:unit
 
-    - name: Start Vite server
+    - name: Start Vite server (wait for it to be ready)
       run: |
         npm run dev &
-        sleep 10
+        # Wait for the Vite server to be ready by checking the health endpoint
+        until curl -s http://localhost:3000; do
+          echo "Waiting for Vite server to start..."
+          sleep 5
+        done
       env:
         CI: true
 
